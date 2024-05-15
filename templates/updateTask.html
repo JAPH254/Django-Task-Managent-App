@@ -1,53 +1,33 @@
-{% extends "base.html"%} {% block content %}
+{% extends "base.html" %}
+{% block content %}
 <h3>Update Task</h3>
+
 <form action="" method="post">
   {% csrf_token %}
-  <!-- title = request.POST.get('title')
-  description = request.POST.get('description')
-  due_date = request.POST.get('due_date')
-  priority = request.POST.get('priority')
-  assignee_id = request.POST.get('assignee')
-  assignee = user.objects.get(id=assignee_id)
-  dependencies = request.POST.getlist('dependencies')
-  task = Task(title=title, description=description, due_date=due_date, priority=priority, assignee=assignee)
-  task.save() -->
-  <div class="form-group">
-    <label for="title">Title</label>
-    <input type="text" class="form-control" id="title" name="title" value="{{ task.title }}" required>
-  </div>
-  <div class="form-group">
-    <label for="description">Description</label>
-    <textarea class="form-control" id="description" name="description" required>{{ task.description }}</textarea>
-  </div>
-  <div class="form-group">
-    <label for="due_date">Due Date</label>
-    <input type="date" class="form-control" id="due_date" name="due_date" value="{{ task.due_date }}" required>
-  </div>
-  <div class="form-group">
-    <label for="priority">Priority</label>
-    <select class="form-control" id="priority" name="priority" required>
-      <option value="Low" {% if task.priority == 'Low' %} selected {% endif %}>Low</option>
-      <option value="Medium" {% if task.priority == 'Medium' %} selected {% endif %}>Medium</option>
-      <option value="High" {% if task.priority == 'High' %} selected {% endif %}>High</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="assignee">Assignee</label>
-    <select class="form-control" id="assignee" name="assignee" required>
-      {% for user in users %}
-      <option value="{{ user.id }}" {% if task.assignee.id == user.id %} selected {% endif %}>{{ user.username }}</option>
-      {% endfor %}
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="dependencies">Dependencies</label>
-    <select class="form-control" id="dependencies" name="dependencies" multiple>
-      {% for task in tasks %}
-      <option value="{{ task.id }}" {% if task in task.dependencies.all %} selected {% endif %}>{{ task.title }}</option>
-      {% endfor %}
-    </select>
-  </div>
-  <button type="submit" class="btn btn-primary">Update Task</button>
-  
+  <label for="title">Title:</label>
+  <input type="text" name="title" id="title" value="{{ task.title }}" required /><br />
+  <label for="description">Description</label>
+  <textarea name="description" id="description" rows="5" required>{{ task.description }}</textarea><br />
+  <label for="due_date">Due Date:</label>
+  <input type="date" name="due_date" id="due_date" value="{{ task.due_date|date:'Y-m-d' }}" /><br />
+  <label for="priority">Priority:</label>
+  <select name="priority" id="priority" required>
+    <option value="High" {% if task.priority == 'High' %} selected {% endif %}>High</option>
+    <option value="Medium" {% if task.priority == 'Medium' %} selected {% endif %}>Medium</option>
+    <option value="Low" {% if task.priority == 'Low' %} selected {% endif %}>Low</option>
+  </select><br />
+  <label for="assignee">Assigned to {{task.assignee}}</label>
+  <select name="assignee" id="assignee" required>
+    {% if users %} {% for user in users %}
+      <option value="{{ user.id }}" {% if task.assignee.id == user.id %} selected {% endif %}>Update to <b>{{ user.username }}</b></option>
+    {% endfor %} {% else %}
+      <option value="" disabled>No users available</option>
+    {% endif %}</select><br />
+  <label for="file">Task File: Current {{task.file}}</label>
+  <input type="file" name="file" id="file" /><br />
+  <button type="submit">Update Task</button>
+
+
 </form>
+
 {% endblock %}

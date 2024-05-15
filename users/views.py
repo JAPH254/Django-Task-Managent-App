@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import user
 from .forms import UserForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 
 def sign_in(request):
     if request.method == 'POST':
@@ -14,7 +15,9 @@ def sign_in(request):
         else:
             error_message = 'Invalid username or password'
             context = {'error_message': error_message}
+            
             return render(request, 'login.html', context)
+        
     else:
         context = {}
     return render(request, 'login.html', context)

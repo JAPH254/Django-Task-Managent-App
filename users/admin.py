@@ -1,4 +1,5 @@
 from django.contrib import admin
-from .models import user
+from django.contrib.auth import get_user_model
 
-admin.site.register(user)
+User = get_user_model()
+admin.site.register(User)

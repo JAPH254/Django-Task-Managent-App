@@ -19,7 +19,9 @@ from django.urls import path, include
 # handle static files
 from django.conf import settings
 from django.conf.urls.static import static
+from taskserver import views
 urlpatterns = [
+    path('', views.home, name='home'),
     path('admin/', admin.site.urls),
     path('server/', include('taskserver.urls')),
     path('users/', include('users.urls')),

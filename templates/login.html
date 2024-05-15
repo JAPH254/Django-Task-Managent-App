@@ -1,15 +1,19 @@
 {%extends "base.html"%} {% block content %}
-<div class="container">
+<div class="container rounded col-6 my-5" style="background-image: url('https://media.istockphoto.com/id/1388643874/photo/checklist.jpg?b=1&s=612x612&w=0&k=20&c=LT8KWuEoSngRMJn4kotFe-mU3QDSaO7G4SKfitC3dBo=');">
   <div class="row">
     <div class="col-md-12">
-      <h1>Login</h1>
+      <h2 class="text-white text-center">Login</h2>
+      
+      <p>Ensure your credentials are valid
+
+      </p>
       <form method="POST">
         {% csrf_token %}
         <div class="form-group">
           <label for="username">Username</label>
           <input
             type="text"
-            class="form-control"
+            class="form-control col-8"
             id="username"
             name="username"
             required
@@ -19,18 +23,18 @@
           <label for="password">Password</label>
           <input
             type="password"
-            class="form-control"
+            class="form-control col-8"
             id="password"
             name="password"
             required
           />
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" class="btn btn-success">Login</button>
       </form>
       <div class="row">
         <div class="col-md-12">
           <p>
-            Don't have an account? <a href="{% url 'register' %}">Register</a>
+            Don't have an account? <a href="{% url 'register' %}" class="text-white">register</a>
           </p>
         </div>
       </div>
