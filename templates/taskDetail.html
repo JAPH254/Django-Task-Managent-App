@@ -1,0 +1,12 @@
+{extends "base.html"} {% block content %}
+<h3>Task Detail</h3>
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">{{task.title}}</h5>
+    <p class="card-text">{{task.description}}</p>
+    <p class="card-text">{{task.date}}</p>
+    <a href="/deleteTask/{{task.id}}" class="btn btn-danger">Delete</a>
+    <a href="/editTask/{{task.id}}" class="btn btn-primary">Edit</a>
+  </div>
+</div>
+{% endblock %}

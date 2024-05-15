@@ -1,0 +1,14 @@
+{%extends "base.html"%} {%block content%}
+<h3>These are your incomplete tasks</h3>
+{%if tasks%} {%for task in tasks%}
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">{{task.title}}</h5>
+    <p class="card-text">{{task.description}}</p>
+    <p class="card-text">{{task.date}}</p>
+    <a href="/completeTask/{{task.id}}" class="btn btn-success">Complete</a>
+  </div>
+</div>
+{%endfor%} {%else%}
+<p>There are no tasks</p>
+{%endif%} {%endblock%}
