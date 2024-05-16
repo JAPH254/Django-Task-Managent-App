@@ -71,12 +71,10 @@ def task_delete(request, id):
 
     return render(request, 'viewTasks.html', {'task': task})
 
-def complete_task(request, id):
-    task = Task.objects.get(id=id)
-    task.completed = True
-    task.save()
-    redirect('viewTask')
-    return render(request, 'completeTask.html', {'task': task})
+def complete_tasks(request):
+    tasks = Task.objects.all()
+    complete = tasks
+    return render(request, 'completeTask.html', {'complete': complete})
 
 def incomplete_task(request, id):
     task = Task.objects.get(id=id)
@@ -85,5 +83,6 @@ def incomplete_task(request, id):
     redirect('viewTask')
     return render(request, 'incompleteTask.html', {'task': task})
 def task_detail(request, id):
-    task = Task.objects.get(id=id)
-    return render(request, 'taskDetail.html', {'task': task})
+    details = Task.objects.get(id=id)
+    return render(request, 'updateTask.html', {'details': details})
+    

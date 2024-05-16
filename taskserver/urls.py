@@ -7,7 +7,7 @@ urlpatterns = [
     path('task-update/<int:id>/', views.task_update, name='task_update'),
     path('task-delete/<int:id>/', views.task_delete, name='task_delete'),
     path('task-detail/<int:id>/', views.task_detail, name='task_detail'),
-    path('complete-task/<int:id>/', views.complete_task, name='completeTasks'),
+    path('complete-tasks/', views.complete_tasks, name='complete_tasks'),
     path('incomplete-task/<int:id>/', views.incomplete_task, name='incompleteTasks'),
     # path('task-create/', views.handlepriority, name='priority'),
 ]

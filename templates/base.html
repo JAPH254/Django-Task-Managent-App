@@ -35,7 +35,7 @@
     >
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="col">
-        <a class="navbar-brand" href="{% url 'home' %}"><h5>Task Manager</h5></a>
+        <a class="navbar-brand" href="{% url 'home' %}"><h5><span class="bg-danger rounded p-1 m-1">SSMP</span>Task Manager</h5></a>
         <P class="bg-secondary col-5 text-center rounded text-white">simply manage your task</P>
         <button
           class="navbar-toggler"
@@ -69,6 +69,17 @@
                     >Create Task</a
                   >
                 </li>
+                <li>
+                  <a class="nav-link" href="{% url 'complete_tasks'%}">Complete Tasks</a>
+
+                </li>
+                <li>
+                  <a class="nav-link" href="#">Pending Tasks</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Profile</a>
+                </li>
+
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                   <span>{{user.username}}</span>

@@ -1,14 +1,17 @@
 {% extends "base.html"%} {% block content %}
 <h3>These are your complete tasks</h3>
-{% if tasks%} {% for task in tasks %}
-<div class="card">
-  <div class="card-body">
-    <h5 class="card-title">{{task.title}}</h5>
-    <p class="card-text">{{task.description}}</p>
-    <p class="card-text">{{task.date}}</p>
-    <a href="/deleteTask/{{task.id}}" class="btn btn-danger">Delete</a>
+<form action="" method="post">
+  {% csrf_token %}
+  {% if tasks%} {% for task in complete %}
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{task.title}}</h5>
+      <p class="card-text">{{task.description}}</p>
+      <p class="card-text">{{task.due_date}}</p>
+      <a href="/deleteTask/{{task.id}}" class="btn btn-danger">Delete</a>
+    </div>
   </div>
-</div>
-{% endfor %} {% else %}
-<p>There are no tasks</p>
-{% endif %} {% endblock %}
+  {% endfor %} {% else %}
+  <p>There are no tasks</p>
+  {% endif %} {% endblock %}
+</form>

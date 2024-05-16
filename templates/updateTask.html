@@ -1,33 +1,95 @@
 {% extends "base.html" %}
 {% block content %}
-<h3>Update Task</h3>
-
+<h3 class="text-center text-secondary">Update Task</h3>
+<div class="row">
+<div class="col-4 border m-1 p-1">
 <form action="" method="post">
   {% csrf_token %}
-  <label for="title">Title:</label>
-  <input type="text" name="title" id="title" value="{{ task.title }}" required /><br />
-  <label for="description">Description</label>
-  <textarea name="description" id="description" rows="5" required>{{ task.description }}</textarea><br />
-  <label for="due_date">Due Date:</label>
-  <input type="date" name="due_date" id="due_date" value="{{ task.due_date|date:'Y-m-d' }}" /><br />
-  <label for="priority">Priority:</label>
+  <h5 class="text-center text-secondary">Task Update</h5>
+  <div class="row p-1 m-2" style="display: flex; gap: 3rem">  <label for="title">Title:</label>
+  <input type="text" name="title" id="title" value="{{ task.title }}" required /><br /></div>
+<div class= "row p-1 m-1" style="display: flex;gap: 1rem;">  <label for="description">Description</label>
+  <textarea name="description" id="description" rows="5" required>{{ task.description }}</textarea><br /></div>
+<div class="row p-1 m-1" style="display: flex;gap: 2rem;">  <label for="due_date">Due Date:</label>
+  <input type="date" name="due_date" id="due_date" value="{{ task.due_date|date:'Y-m-d' }}" /><br /></div>
+<div class="row p-1 m-1" style="display: flex;gap: 3rem;"> <label for="priority">Priority:</label>
   <select name="priority" id="priority" required>
     <option value="High" {% if task.priority == 'High' %} selected {% endif %}>High</option>
     <option value="Medium" {% if task.priority == 'Medium' %} selected {% endif %}>Medium</option>
     <option value="Low" {% if task.priority == 'Low' %} selected {% endif %}>Low</option>
-  </select><br />
-  <label for="assignee">Assigned to {{task.assignee}}</label>
+  </select><br /></div>
+ <div class="row p-1 m-1" style="display: flex; gap: 1rem;">  <label for="assignee">Assigned to {{task.assignee}}</label>
   <select name="assignee" id="assignee" required>
     {% if users %} {% for user in users %}
       <option value="{{ user.id }}" {% if task.assignee.id == user.id %} selected {% endif %}>Update to <b>{{ user.username }}</b></option>
     {% endfor %} {% else %}
       <option value="" disabled>No users available</option>
-    {% endif %}</select><br />
-  <label for="file">Task File: Current {{task.file}}</label>
-  <input type="file" name="file" id="file" /><br />
-  <button type="submit">Update Task</button>
+    {% endif %}</select><br /></div>
+<div class="row p-1 m-1" style="display: flex;gap: 1rem;">  <label for="file">Task File: Current {{tas.file}}</label>
+  <input type="file" name="file" id="file" /><br /></div>
+<div class="row p-1 m-1">  <button type="submit" class="bg-info rounded"><span class="p-1 ">Update Task</span><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+  <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001"/>
+</svg></span></button></div>
+
 
 
 </form>
+</div>
+<div class="col"></div>
+<div class="col-4 p-1 m-1">
+  <h5 class="text-secondary text-center ">Task Details</h5>
+ <div class="card">
+  <div class="card-body">
+    <table>
+      <tr>
+        <td><b>Title:</b></td>
+        <td>{{ task.title }}</td>
+      </tr>
+      <tr>
+        <td><b>About:</b></td>
+        <td>{{ task.description }}</td>
+      </tr>
+      <tr>
+        <td><b>Created:</b></td>
+        <td>{{ task.created_at }}</td>
+      </tr>
+      <tr>
+        <td><b>Updated:</b></td>
+        <td>{{ task.updated_at }}</td>
+      </tr>
+      <tr>
+        <td><b>Due_Date:</b></td>
+        <td>{{ task.due_date }}</td>
+      </tr>
+      <tr>
+        <td><b>Priority:</b></td>
+        <td>{{ task.priority }}</td>
+      </tr>
+      <tr>
+        <td><b>Assignee:</b></td>
+        <td>{{ task.assignee }}</td>
+      </tr>
+      <tr>
+        <td><b>Status:</b></td>
+        <td>{{ task.completed }}</td>
+      </tr>
+      <td><b>File:</b></td>
+        <td>
+          {% if task.file %}
+          <a href="{{ task.file.url }}" class="btn btn-primary">View</a>
+          {% else %}
+          No file
+          {% endif %}
+        </td>
+      <tr>
+
+    </table>
+    <a href="{% url 'task_delete' task.id %}" class="btn btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+      <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+    </svg></a>
+  </div>
+ </div>
+</div>
+</div>
 
 {% endblock %}
