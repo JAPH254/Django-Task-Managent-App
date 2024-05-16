@@ -25,12 +25,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}{% endblock %} Task Manager</title>
+  
     {% endblock %}
   </head>
   <body>
-    <div class="container pt-2 mt-2 rounded" style="background-color: #1ECBE1;min-height: 95vh;">
+    <div
+      class="container pt-2 mt-2 rounded"
+      style="background-color: #1ecbe1; min-height: 95vh"
+    >
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{% url 'home' %}">Task Manager</a>
+        <div class="col">
+        <a class="navbar-brand" href="{% url 'home' %}"><h5>Task Manager</h5></a>
+        <P class="bg-secondary col-5 text-center rounded text-white">simply manage your task</P>
         <button
           class="navbar-toggler"
           type="button"
@@ -42,33 +48,44 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
+        </div>
+        <div class="col">
+        
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul
             class="navbar-nav {% if user.is_authenticated %} ml-auto {% endif %}"
           >
-            {% if user.is_authenticated %}
-            <li>
-              <a class="navbar-brand" href="{% url 'home' %}">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'task_list' %}">Tasks</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'task_create' %}">Create Task</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-              <span>{{user.username}}</span>
-              <img src="{{user.profile_picture}}" alt="">
-            </li>
-            {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'login' %}">Login</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'register' %}">Register</a>
-            </li>
-            {% endif %}
+          
+              {% if user.is_authenticated %}
+              <div class="row">
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'task_list' %}">Tasks</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'task_create' %}"
+                    >Create Task</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                  <span>{{user.username}}</span>
+                  <img src="{{user.profile_picture}}" alt="{{user.nickname}}" />
+                </li>
+              </div>
+              {% else %}
+              <div class="row">
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'register' %}">Register</a>
+                </li>
+              </div>
+              {% endif %}
+            </div>
           </ul>
         </div>
       </nav>

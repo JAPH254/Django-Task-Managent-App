@@ -1,18 +1,20 @@
 {% extends "base.html"%} {% block content %}
 
 <body>
-  <h1>Create Task</h1>
-  <form method="POST" >
+  <h5 class="text-primary text-center">Task Manager</h5>
+  <p class="text-dark text-center">Task Management made simple</p>
+  <form method="POST" class="border col-4 p-5" >
     {% csrf_token %}
     <label for="title">Title:</label>
-    <input type="text" name="title" id="title" required /><br />
+    <input type="text" name="title" id="title" required class=" border rounded outline " placeholder="Add a title" /><br />
+
 
     <label for="description">Description:</label>
-    <textarea name="description" id="description" rows="5" required></textarea
+    <textarea name="description" id="description" rows="5" required class=" border rounded outline d-flex place" placeholder="Add a desciption"></textarea
     ><br />
 
     <label for="due_date">Due Date:</label>
-    <input type="date" name="due_date" id="due_date" /><br />
+    <input type="date" name="due_date" id="due_date" class=" border rounded outline" placeholder="Add due date"/><br />
 
     <label for="priority">Priority:</label>
     <select name="priority" id="priority" required>
@@ -22,7 +24,7 @@
     ><br />
 
     <label for="assignee">Assign To:</label>
-    <select name="assignee" id="assignee" required>
+    <select name="assignee" id="assignee" required >
       {% if users %} {% for user in users %}
       <option value="{{ user.id }}">{{ user.username }}</option>
       {% endfor %} {% else %}
